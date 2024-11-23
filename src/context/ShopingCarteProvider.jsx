@@ -4,15 +4,29 @@ import ShoppingCarte from "../compoments/ShoppingCarte";
 const ShopingCarteContext = createContext({})
 
 
-const ShopingCarteProvider = ({children}) => {
+const ShopingCarteProvider = ({children,setData}) => {
     const [carteItem, setCarteItem] = useState([])
     const [isOpen , setIsOpen] = useState();
     const [inputValue, setInputValue] = useState('');
+    const [mode , setMode] = useState(true);
 
+
+    
+
+    
     const searsh = (e)=>{
       setInputValue(e)
     }
     
+    const handleMode = () => {
+      mode? 
+      setMode(false):
+      setMode(true);
+      
+      setData(mode) ;
+      
+      
+    }
 
     const openCart = () => {
       setIsOpen(true)
@@ -77,13 +91,16 @@ const ShopingCarteProvider = ({children}) => {
                                           carteItem,
                                           isOpen,
                                           inputValue,
+                                          mode,
                                           getItemsQuantity,
                                           increseCarteQuantity,
                                           decreseCarteQuantity,
                                           removeItem,
                                           openCart,
                                           closeCart,
-                                          searsh
+                                          searsh,
+                                          setMode,
+                                          handleMode
                                           }}>
         {children}
         <ShoppingCarte/>

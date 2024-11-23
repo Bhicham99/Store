@@ -1,22 +1,28 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Route, Routes } from 'react-router-dom';
-import Home from './compoment/Home';
-import Store from './compoment/Store';
-import About from './compoment/About';
-import Navigation from './compoment/Navigation';
+import Home from './compoments/Home';
+import Store from './compoments/Store';
+import About from './compoments/About';
+import Navigation from './compoments/Navigation';
 import { Container } from 'react-bootstrap';
-import ShopingCarteProvider from './context/ShopingCarteProvider';
-import SearshItem from './compoment/SearshItem';
+import ShopingCarteProvider, { useShopingCarte } from './context/ShopingCarteProvider';
+import SearshItem from './compoments/SearshItem';
+import ShoppingCarte from './compoments/ShoppingCarte';
+import { useState } from 'react';
 
 
 function App() {
-  return (
+  const [data, setData] = useState (false) ;
+  console.log(data);
   
+    return (
+  
+    <div className={`bg-${data?'dark':'light'}`}>
 
-    <ShopingCarteProvider>
+    <ShopingCarteProvider setData={setData}>
     <Navigation/>
-    <Container className=''>
+    <Container >
       <SearshItem className='Searsh'/>
       <Routes>
         <Route path='/' element={<Home/>}/>
@@ -27,6 +33,7 @@ function App() {
     </Container>
     </ShopingCarteProvider>
     
+    </div>
   );
 }
 
